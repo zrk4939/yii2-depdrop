@@ -13,7 +13,7 @@ use yii\web\AssetBundle;
 
 class DepDropAsset extends AssetBundle
 {
-    public $sourcePath = '@domain/widgets/depdrop/assets/dist';
+    public $sourcePath = '@zrk4939/widgets/depdrop/assets/dist';
 
     public $js = [
         'depdrop_plugin.js'
