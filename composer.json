@@ -1,0 +1,17 @@
+{
+    "name": "zrk4939/yii2-depdrop",
+    "description": "The dependent dropdown widget for the Yii framework 2",
+    "type": "yii2-extension",
+    "keywords": ["yii2","dependent dropdown", "dropdown"],
+    "authors": [
+        {
+            "name": "Ilya Youshketov",
+            "email": "zrk4939@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "zrk4939\\widgets\\depdrop\\": ""
+        }
+    }
+}
