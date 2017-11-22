@@ -1,4 +1,4 @@
-# yii2-plupload
+# yii2-depdrop
 
 A Dependent DropDown widget for the Yii2 framework
 
