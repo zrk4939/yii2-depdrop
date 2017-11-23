@@ -6,9 +6,11 @@ function depDrop(selector, depends, url) {
     var $this = this;
 
     this.init = function () {
+        this.depField.setAttribute('disabled', true);
+
         this.initEvents();
 
-        console.log('Ready!');
+        // console.log('Ready!');
     };
 
     this.initEvents = function () {
@@ -25,24 +27,23 @@ function depDrop(selector, depends, url) {
     };
 
     this.getOptions = function (el) {
-        if (this.checkReady()) {
+        if (this.beforeSend() && this.checkReady()) {
             $.ajax({
                 url: $this.url,
                 type: 'post',
                 data: this.populateData(),
                 success: function (response) {
-                    console.log('loaded!');
+                    // console.log('loaded!');
 
-                    $($this.depField)
-                        .find('option')
-                        .remove();
+                    $this.removeOldOptions();
 
                     $.each(response.output, function (index, value) {
                         $($this.depField)
                             .find('option')
                             .end()
                             .append('<option value="' + value.id + '">' + value.name + '</option>')
-                            .val('whatever')
+                            .val(response.selected)
+                            .prop('disabled', false)
                     });
 
                     if (response.selected) {
@@ -52,6 +53,38 @@ function depDrop(selector, depends, url) {
                     }
                 }
             });
+        }
+    };
+
+    this.beforeSend = function () {
+        var cleanOut = false;
+
+        $.each(this.depends, function (index, selector) {
+            var el = document.getElementById(selector);
+
+            if (el === null || el.value === "") {
+                cleanOut = true;
+            }
+        });
+
+        if (cleanOut && this.depField && !this.depField.getAttribute('disabled')) {
+            this.depField.value = '';
+            this.depField.setAttribute('disabled', true);
+            this.depField.dispatchEvent(new Event('change'));
+
+            console.log('cleared!');
+        }
+
+        return !cleanOut;
+    };
+
+    this.removeOldOptions = function () {
+        for (i = 0; i < this.depField.length; i++) {
+            var option = this.depField.options[i];
+
+            if (option.value !== '') {
+                this.depField.removeChild(this.depField[i]);
+            }
         }
     };
 
@@ -84,5 +117,5 @@ function depDrop(selector, depends, url) {
         });
 
         return ready;
-    }
+    };
 }
