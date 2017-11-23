@@ -4,22 +4,14 @@ A Dependent DropDown widget for the Yii2 framework
 
 ## Installation
 
-add
+Add
 
 ```
 "zrk4939/yii2-depdrop": "@dev"
 ```
-to the require section of your `composer.json` file.
 
-and
+to the require section of your `composer.json` file and execute `composer update`.
 
-```
-{
-    "type": "vcs",
-    "url": "https://github.com/zrk4939/yii2-depdrop.git"
-}
-```
-to the repositories array of your `composer.json` file.
 
 ## Usage
 
