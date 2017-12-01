@@ -79,13 +79,7 @@ function depDrop(selector, depends, url) {
     };
 
     this.removeOldOptions = function () {
-        for (i = 0; i < this.depField.length; i++) {
-            var option = this.depField.options[i];
-
-            if (option.value !== '') {
-                this.depField.removeChild(this.depField[i]);
-            }
-        }
+        $($this.depField).find('option').remove();
     };
 
     this.populateData = function () {
