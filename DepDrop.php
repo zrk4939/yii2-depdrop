@@ -28,6 +28,7 @@ class DepDrop extends InputWidget
         $varName = 'depdrop_' . $this->getId();
         $depends = Json::encode($this->depends);
 
+        echo Html::activeHiddenInput($this->model, $this->attribute, ['value' => '', 'id' => '']);
         echo Html::activeDropDownList($this->model, $this->attribute, [], ['class' => 'form-control', 'prompt' => $this->placeholder]);
 
         $script = <<<JS
