@@ -5,6 +5,8 @@ function depDrop(selector, depends, url) {
 
     var $this = this;
 
+    var $event = new Event('change');
+
     this.init = function () {
         this.depField.setAttribute('disabled', true);
 
@@ -14,14 +16,11 @@ function depDrop(selector, depends, url) {
     };
 
     this.initEvents = function () {
-        $.each(this.depends, function (index, selector) {
-            var dependInput = document.getElementById(selector);
-            if (dependInput !== null) {
-                dependInput.addEventListener('change', function (event) {
-                    $this.getOptions(event.target);
-                });
-            }
-        });
+        for (i = 0; i < this.depends.length; i++) {
+            $('#' + this.depends[i]).on('change', function (event) {
+                $this.getOptions(event.target);
+            });
+        }
 
         this.getOptions();
     };
@@ -47,9 +46,7 @@ function depDrop(selector, depends, url) {
                     });
 
                     if (response.selected) {
-                        // $($this.depField).val(response.selected).trigger('change');
-                        $this.depField.value = response.selected;
-                        $this.depField.dispatchEvent(new Event('change'));
+                        $($this.depField).val(response.selected).trigger('change');
                     }
                 }
             });
@@ -68,9 +65,7 @@ function depDrop(selector, depends, url) {
         });
 
         if (cleanOut && this.depField && !this.depField.getAttribute('disabled')) {
-            this.depField.value = '';
-            this.depField.setAttribute('disabled', true);
-            this.depField.dispatchEvent(new Event('change'));
+            $($this.depField).val(response.selected).prop('disabled').trigger('change');
 
             console.log('cleared!');
         }
@@ -91,6 +86,14 @@ function depDrop(selector, depends, url) {
 
             if (el !== null) {
                 all_params[el.id] = el.value;
+
+                if (el.name.match(/\[\w+\]/i)) {
+                    var attr = el.name.replace(/^.*?\[(.*?)\]$/i, '$1'),
+                        modelName = el.name.replace(/^(.*?)\[.*?\]$/i, '$1');
+
+                    data[modelName] = {};
+                    data[modelName][attr] = el.value;
+                }
             }
         });
 
