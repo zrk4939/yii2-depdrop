@@ -91,7 +91,10 @@ function depDrop(selector, depends, url) {
                     var attr = el.name.replace(/^.*?\[(.*?)\]$/i, '$1'),
                         modelName = el.name.replace(/^(.*?)\[.*?\]$/i, '$1');
 
-                    data[modelName] = {};
+                    if (typeof data[modelName] === 'undefined') {
+                        data[modelName] = {};
+                    }
+
                     data[modelName][attr] = el.value;
                 }
             }
