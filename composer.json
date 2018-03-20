@@ -2,7 +2,7 @@
     "name": "zrk4939/yii2-depdrop",
     "description": "The dependent dropdown widget for the Yii framework 2",
     "type": "yii2-extension",
-    "license": "BSD 3-Clause",
+    "license": "unlicensed",
     "keywords": ["yii2","dependent dropdown", "dropdown"],
     "authors": [
         {
