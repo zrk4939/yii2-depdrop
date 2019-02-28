@@ -74,7 +74,9 @@ function depDrop(selector, depends, url) {
     };
 
     this.removeOldOptions = function () {
-        $($this.depField).find('option').remove();
+        $($this.depField).find('option').filter(function () {
+            return $(this).attr('value') !== '';
+        }).remove();
     };
 
     this.populateData = function () {

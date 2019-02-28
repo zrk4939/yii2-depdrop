@@ -16,7 +16,7 @@ class DepDropAsset extends AssetBundle
     public $sourcePath = '@zrk4939/widgets/depdrop/assets/dist';
 
     public $js = [
-        'depdrop_plugin.js'
+        'depdrop_plugin.min.js'
     ];
 
     public $depends = [
