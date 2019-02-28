@@ -18,6 +18,7 @@ function depDrop(selector, depends, url) {
     this.initEvents = function () {
         for (i = 0; i < this.depends.length; i++) {
             $('#' + this.depends[i]).on('change', function (event) {
+                $this.removeOldOptions();
                 $this.getOptions(event.target);
             });
         }
@@ -32,10 +33,6 @@ function depDrop(selector, depends, url) {
                 type: 'post',
                 data: this.populateData(),
                 success: function (response) {
-                    // console.log('loaded!');
-
-                    $this.removeOldOptions();
-
                     $.each(response.output, function (index, value) {
                         $($this.depField)
                             .find('option')
